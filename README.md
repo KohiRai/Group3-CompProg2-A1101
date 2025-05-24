@@ -10,7 +10,7 @@ Instructions(First Stime):
 4. git config --global init.default branch main
 
 After you have done to open the code, clone and make some changes do these:
-Instructions(Open Code):
+Instructions(Open Code via straight to NetBeansIDE):
 1. On "<> Code" page. Press the green button that have the text "<>Code" and copy the link "https://github.com/KohiRai/Group3-CompProg2-A1101.git"
 2. Go to NetbeansIDE go to the top bar and press on "Team"
 3. Next hover on "git" and press "Clone"
@@ -19,8 +19,11 @@ Instructions(Open Code):
 6. After that open the cloned java
 7. Lastly, enter some codes and changes.
 
-After you have done your code, contribution and changes follow these:
+Instructions(Open Code via downloading the zip)
+1. Download the zip file
+
+After you have done your code, contribution and changes follow these (Safest way to Push, as Netbeans push and commit might not work):
 Instructions(Upload, commit and create a pull request):
 1. Open Git Bash once again
 2. As you have opened Git Bash
-3. 
+3. Open your folder and find the NetBeansProjects
