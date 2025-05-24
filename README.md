@@ -26,10 +26,13 @@ Instructions(Open Code via downloading the zip)
 4. Press Desktop, Find Downloads or where you extracted the file, then find the file folder after press it or open it
 5. Lastly, you will see a file with a coffee icon press the Open Project. Now you can code and add some changes.
 
-After you have done your code, contribution and changes follow these (Safest way to Push, as Netbeans push and commit might not work):
-Instructions(Upload, commit and create a pull request):
-1. Open Git Bash once again
-2. As you have opened Git Bash
-3. Open your folder and find the file folder of the code you have done just like when you opened it via zip
-4. Once you see the folder open it, open it again
-5. Now you see files like .gitignore, nbproject, src
+After you have done your code, contribution and changes follow these:
+Instructions:
+1. Go to github
+2. Press add file -> Add Files
+3. Press Choose files go to the file folder and drag all the files to the box then press x once dragged.
+4. Before Pressing commit changes you will be given an option either commit directly or create a new branch(Pull request)
+5. Choose Create a new branch and rename the branch with your name and press propose changes.
+6. Rename the title with what change you did or made
+7. Add a description about the change and press create pull request
+8. Now you made your pull request and will be pending for merge to our official code
