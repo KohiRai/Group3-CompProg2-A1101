@@ -24,7 +24,10 @@ Instructions(Open Code via downloading the zip)
 2. Go to NetBeansIDE
 3. Press File -> OpenProject
 4. Press Desktop, Find Downloads or where you extracted the file, then find the file folder after press it or open it
-5. Lastly, you will see a file with a coffee icon press the Open Project. Now you can code and add some changes.
+5. Lastly, you will see a file with a coffee icon press the Open Project.
+6. On the left you will see the file folder press Source Packages, double packages, then double click the Group3MotorPHGUI.java to code and change
+7. Now you can code and add some changes.
+   
 
 After you have done your code, contribution and changes follow these:
 Instructions:
