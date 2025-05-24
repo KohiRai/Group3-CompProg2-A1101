@@ -21,7 +21,7 @@ public class EmployeeList {
     private static void show(){
     List<String> list = new ArrayList<>();
     
-    Collections.addAll(list, EmployeeID, EmployeeName, EmployeeBirthday, EmployeeGender);
+//    Collections.addAll(list, EmployeeID, EmployeeName, EmployeeBirthday, EmployeeGender);
     }
     
 }
