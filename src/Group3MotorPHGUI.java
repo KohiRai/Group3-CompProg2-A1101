@@ -1,19 +1,23 @@
-import java.util.Collection;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+
 
 
 
 public class Group3MotorPHGUI extends javax.swing.JFrame {
 
-
+    
+    
+    
     public Group3MotorPHGUI() {
         initComponents();
         EmployeeDetails.setEditable(false);
+        
+        Employees = new ArrayList<>();
+        Employees.add(new Employee("10001", "Juztin Kristoffer P. Estacio", "December 7, 2005", "Male"));
+        Employees.add(new Employee("10002", "LeBron James", "December 30, 1984", "Male"));
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -97,16 +101,16 @@ public class Group3MotorPHGUI extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(17, 17, 17)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(UserIDComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(SearchEmployee))
-                    .addComponent(jScrollPane1)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(34, 34, 34)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -128,7 +132,7 @@ public class Group3MotorPHGUI extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(50, 50, 50)
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -167,13 +171,19 @@ public class Group3MotorPHGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void UserIDComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserIDComboBoxActionPerformed
+        
 
     }//GEN-LAST:event_UserIDComboBoxActionPerformed
 
     private void SearchEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchEmployeeActionPerformed
-        String selectedItem = (String) UserIDComboBox.getSelectedItem();
-        
-        EmployeeDetails.setText("Employee Information " + selectedItem); 
+        String selectedEmpID = (String) UserIDComboBox.getSelectedItem();
+
+            for (Employee emp : Employees) {
+                if (emp.getEmployeeID().equals(selectedEmpID)){
+                    EmployeeDetails.setText(emp.toString());
+                    return;
+                }
+            }
         //Show Employee Details
         
 //        if(EmployeeInformation)
@@ -211,12 +221,6 @@ public class Group3MotorPHGUI extends javax.swing.JFrame {
     }
     public static void main(String args[]) {
         
-        var Employee1 = new Employee("10001", "Juztin Kristoffer P. Estacio", "December 7, 2005", "Male");
-        var Employee2 = new Employee("10002", "LeBron James", "December 30, 1984", "Male");
-        Map<String,Employee> map = new HashMap<>();
-        
-        map.put(Employee1.getEmployeeID(), Employee1);
-        map.put(Employee2.getEmployeeID(), Employee2);
         
         
      
@@ -268,5 +272,5 @@ public class Group3MotorPHGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
-    private ArrayList<EmployeeComparator> EmployeeList = new ArrayList<>();
+ private ArrayList<Employee> Employees;
 }
