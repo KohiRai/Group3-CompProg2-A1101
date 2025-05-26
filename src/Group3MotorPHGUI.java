@@ -1,7 +1,10 @@
-
+import java.util.Collection;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 
@@ -170,7 +173,6 @@ public class Group3MotorPHGUI extends javax.swing.JFrame {
     private void SearchEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchEmployeeActionPerformed
         String selectedItem = (String) UserIDComboBox.getSelectedItem();
         
-        var EmpInfo = new EmployeeInformation(selectedItem);
         EmployeeDetails.setText("Employee Information " + selectedItem); 
         //Show Employee Details
         
@@ -183,31 +185,40 @@ public class Group3MotorPHGUI extends javax.swing.JFrame {
 
     private void CalculateSalaryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CalculateSalaryActionPerformed
         // TODO add your handling code here:
-        var BS = EnterBasicSalary.getText();
-        int BasicSalary = Integer.parseInt(BS);
-        var DW = EnterDaysWorked.getText();
-        int DaysWorked = Integer.parseInt(DW);
-        var OH = EnterOvertimeHours.getText();
-        int OvertimeHours = Integer.parseInt(OH);
+       try {
+        int BasicSalary = Integer.parseInt(EnterBasicSalary.getText());
+        int DaysWorked = Integer.parseInt(EnterDaysWorked.getText());
+        int OvertimeHours = Integer.parseInt(EnterOvertimeHours.getText());
         
-        //Insert here a showmessagedialog using these below (Task for Allysa)
-         JOptionPane.showMessageDialog(this, "Summary\n"
-                                        + "Benefits: sampleInt\n"
-                                        + "Gross Salary: SampleInt");
-         
-        //exception(If statements where if user entered text instead of Int(Numbers) (Task for Rodel)
-        //if statement then add the code below inside the {} after you created working if statement/s
+        var Calculate = new PayrollCalculation(BasicSalary, DaysWorked, OvertimeHours);
+
+    // Show result dialog (Task for Allysa)
+        JOptionPane.showMessageDialog(this, "Summary\n"
+        + "Benefits: " + "\n"
+        + "Gross Salary: "  );//Reconstruct this part by calling out methods such as 
+                              //Calculate.showEarnings or other methods that can be found in the PayrollCalculation class
+
+        } catch (NumberFormatException e) {
         JOptionPane.showMessageDialog(this, 
-                              "Please enter Numbers instead of Text", 
-                              "CALCULATION ERROR!", 
-                              JOptionPane.WARNING_MESSAGE);
-        
+        "Please enter NUMBERS ONLY in the salary, days worked, and overtime fields.", 
+        "INPUT ERROR!", 
+        JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_CalculateSalaryActionPerformed
 
     public void setUpGUI(){
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
     public static void main(String args[]) {
+        
+        var Employee1 = new Employee("10001", "Juztin Kristoffer P. Estacio", "December 7, 2005", "Male");
+        var Employee2 = new Employee("10002", "LeBron James", "December 30, 1984", "Male");
+        Map<String,Employee> map = new HashMap<>();
+        
+        map.put(Employee1.getEmployeeID(), Employee1);
+        map.put(Employee2.getEmployeeID(), Employee2);
+        
+        
      
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -257,5 +268,5 @@ public class Group3MotorPHGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
-    private ArrayList<EmployeeList> EmployeeList = new ArrayList<>();
+    private ArrayList<EmployeeComparator> EmployeeList = new ArrayList<>();
 }
