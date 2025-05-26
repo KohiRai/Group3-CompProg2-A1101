@@ -1,58 +1,41 @@
 
-public class Employee {
-    
+import java.util.ArrayList;
+import java.util.List;
+
+
+
+public class Employee{
+    private String EmployeeID;
     private String EmployeeName;
-    private int EmployeeID;
-    private String EmployeeGender;
     private String EmployeeBirthday;
+    private String EmployeeGender;
     
-    
-    //constructor
-    public Employee(String EmployeeName, int EmployeeID, String EmployeeGender, String EmployeeBirthday){
-        this.EmployeeName = EmployeeName;
+
+    public Employee(String EmployeeID, String EmployeeName, String EmployeeBirthday, String EmployeeGender) {
         this.EmployeeID = EmployeeID;
-        this.EmployeeGender = EmployeeGender;
+        this.EmployeeName = EmployeeName;
         this.EmployeeBirthday = EmployeeBirthday;
-}
-    //getter Methods
-    public String getName(){
-        return EmployeeName;
+        this.EmployeeGender = EmployeeGender;
     }
+
     
-    public int getID(){
+//    @Override
+//    public int compareTo(Employee other) {
+//        return EmployeeID.compareTo(other.EmployeeID);
+//    }
+//
+    @Override
+    public String toString(){
+        return "Employee Information\n\n" + "Employee ID: " + EmployeeID + "\nEmployee Name: " + EmployeeName + "\nEmployee Birthday: " + EmployeeBirthday + "\nEmployee Gender: " + EmployeeGender;
+    }
+
+    
+        public String getEmployeeID() {
         return EmployeeID;
     }
-    
-    public String getGender(){
-        return EmployeeGender;
-    }
-    
-    public String getBirthday(){
-        return EmployeeBirthday;
-    }
-    
-    
-    //setter Methods 
-            
-    private void setName(String EmployeeName){        
-       this.EmployeeName = EmployeeName;
-    }
-    private void setID(int EmployeeID){        
-       this.EmployeeID = EmployeeID;
-    }
-    private void setGender(String EmployeeGender){        
-       this.EmployeeGender = EmployeeGender;
-    }
-    private void setBirthday(String EmployeeBirthday){        
-       this.EmployeeBirthday = EmployeeBirthday;
-    }
-    
-    public void display(){
-       System.out.println("\n"+ "Employee Name: " + EmployeeName + "\n" + 
-                          "Employee ID: " + EmployeeID + "\n" +
-                          "Employee Gender: " + EmployeeGender + "\n" + 
-                          "Employee Birthday: " + EmployeeBirthday + "\n");
-    }
-    
+//
+//    public void setEmployeeID(String EmployeeID) {
+//        this.EmployeeID = EmployeeID;
+//    }
+   
 }
-
