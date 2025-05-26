@@ -32,13 +32,13 @@ public class Group3MotorPHGUI extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         EmployeeDetails = new javax.swing.JTextArea();
         EnterBasicSalary = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         EnterDaysWorked = new javax.swing.JTextField();
         EnterOvertimeHours = new javax.swing.JTextField();
         CalculateSalary = new javax.swing.JButton();
+        SalaryCalculator = new javax.swing.JLabel();
+        WorkedDays = new javax.swing.JLabel();
+        OvertimeHours = new javax.swing.JLabel();
+        BasicPay = new javax.swing.JLabel();
 
         jButton1.setText("jButton1");
 
@@ -75,23 +75,39 @@ public class Group3MotorPHGUI extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setText("Enter Basic Salary:");
-
-        jLabel4.setText("Salary Calculator");
-        jLabel4.setPreferredSize(new java.awt.Dimension(200, 20));
-
-        jLabel5.setText("Enter Overtime Hours:");
-
-        jLabel6.setText("Enter Days Worked:");
-
         EnterDaysWorked.setText("0");
+        EnterDaysWorked.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EnterDaysWorkedActionPerformed(evt);
+            }
+        });
 
         EnterOvertimeHours.setText("0");
 
-        CalculateSalary.setText("Calculate");
+        CalculateSalary.setBackground(new java.awt.Color(204, 204, 204));
+        CalculateSalary.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        CalculateSalary.setText("CALCULATE");
         CalculateSalary.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CalculateSalaryActionPerformed(evt);
+            }
+        });
+
+        SalaryCalculator.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        SalaryCalculator.setText("SALARY CALCULATOR");
+        SalaryCalculator.setPreferredSize(new java.awt.Dimension(200, 20));
+
+        WorkedDays.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        WorkedDays.setText("Days Worked:");
+
+        OvertimeHours.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        OvertimeHours.setText("Overtime Hours:");
+
+        BasicPay.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        BasicPay.setText("Basic Salary:");
+        BasicPay.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                BasicPayFocusGained(evt);
             }
         });
 
@@ -110,38 +126,36 @@ public class Group3MotorPHGUI extends javax.swing.JFrame {
                         .addComponent(SearchEmployee))
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addComponent(jLabel6)
-                                    .addGap(25, 25, 25))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel3)
-                                    .addGap(33, 33, 33)))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(EnterBasicSalary)
-                                .addComponent(EnterDaysWorked, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel5)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(EnterOvertimeHours, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(CalculateSalary))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(49, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(WorkedDays)
+                            .addComponent(BasicPay))
+                        .addGap(33, 33, 33)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(EnterBasicSalary)
+                            .addComponent(EnterOvertimeHours, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(OvertimeHours)
+                        .addGap(18, 18, 18)
+                        .addComponent(EnterDaysWorked, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(SalaryCalculator, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(53, 53, 53)
+                        .addComponent(CalculateSalary)))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(14, 14, 14)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
                             .addComponent(UserIDComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -149,22 +163,23 @@ public class Group3MotorPHGUI extends javax.swing.JFrame {
                         .addGap(15, 15, 15)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(EnterBasicSalary, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(6, 6, 6)
+                        .addGap(31, 31, 31)
+                        .addComponent(SalaryCalculator, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
+                            .addComponent(WorkedDays)
+                            .addComponent(EnterBasicSalary, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(OvertimeHours)
                             .addComponent(EnterDaysWorked, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(8, 8, 8)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
+                            .addComponent(BasicPay, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(EnterOvertimeHours, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(12, 12, 12)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(CalculateSalary)))
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
         pack();
@@ -216,6 +231,14 @@ public class Group3MotorPHGUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_CalculateSalaryActionPerformed
 
+    private void BasicPayFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_BasicPayFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BasicPayFocusGained
+
+    private void EnterDaysWorkedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EnterDaysWorkedActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_EnterDaysWorkedActionPerformed
+
     public void setUpGUI(){
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
@@ -256,20 +279,20 @@ public class Group3MotorPHGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel BasicPay;
     private javax.swing.JButton CalculateSalary;
     private javax.swing.JTextArea EmployeeDetails;
     private javax.swing.JTextField EnterBasicSalary;
     private javax.swing.JTextField EnterDaysWorked;
     private javax.swing.JTextField EnterOvertimeHours;
+    private javax.swing.JLabel OvertimeHours;
+    private javax.swing.JLabel SalaryCalculator;
     private javax.swing.JButton SearchEmployee;
     private javax.swing.JComboBox<String> UserIDComboBox;
+    private javax.swing.JLabel WorkedDays;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
  private ArrayList<Employee> Employees;
