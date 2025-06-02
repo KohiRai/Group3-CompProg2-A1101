@@ -1,3 +1,7 @@
+Hello and Welcome!
+
+Download and open the MotorPHGUI Folder for the GUI version of the System and download the Homework Folder to access the Console version of the system
+
 Hello Groupmates!
 
 This is how to open the code and add a Pull Request
