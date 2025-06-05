@@ -1,6 +1,8 @@
-Hello and Welcome!Add commentMore actions
+Hello and Welcome!
 
-Download and open the MotorPHGUI Folder for the GUI version of the System and download the Homework Folder to access the Console version of the system
+Note: A1101Group3 Folder is the current folder where current change requests are done and being implemented
+      Open the MotorPHSalaryCalculation folde to access the ConsoleApplication or CompProg1's System
+      Open the Group3Milestone1 to open the GUI implementation for Milestone1 Requirements
 
 Hello Groupmates!
 
