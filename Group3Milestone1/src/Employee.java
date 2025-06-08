@@ -61,10 +61,16 @@ public class Employee{
     public String getLastName() {
         return LastName;
     }
+    
 
     public String getFirstName() {
         return FirstName;
     }
+    
+        public String getFullname(){
+        return EmployeeName;
+    }
+
 
     public String getBirthday() {
         return Birthday;
@@ -77,6 +83,7 @@ public class Employee{
     public String getAddress() {
         return Address;
     }
+
     
    
     
