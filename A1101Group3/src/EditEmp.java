@@ -4,21 +4,21 @@ import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 
-public class NewEmployeeForm extends javax.swing.JFrame {
+public class EditEmp extends javax.swing.JFrame {
 
-   
+    private Employee OriginalEmpInfo;
+    private Grp3EmpInfo parentView;
+    
     /**
      * Creates new form NewEmployeeForm
      */
-    public NewEmployeeForm() {
-        
-        
-        
+    public EditEmp(Employee selectedEmployee, Grp3EmpInfo parent) {
+        this.OriginalEmpInfo = selectedEmployee;
+        this.parentView = parent;
         initComponents();
+        PopulateFields();
         
         
     }
@@ -32,7 +32,7 @@ public class NewEmployeeForm extends javax.swing.JFrame {
     private void initComponents() {
 
         lblTitle = new javax.swing.JLabel();
-        btnAdd = new javax.swing.JButton();
+        btnUpdate = new javax.swing.JButton();
         lblEmpID = new javax.swing.JLabel();
         lblEmpID1 = new javax.swing.JLabel();
         lblEmpID2 = new javax.swing.JLabel();
@@ -46,7 +46,6 @@ public class NewEmployeeForm extends javax.swing.JFrame {
         btnGoBack = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(450, 500));
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
@@ -58,13 +57,13 @@ public class NewEmployeeForm extends javax.swing.JFrame {
         });
 
         lblTitle.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        lblTitle.setText("New Employee Form");
+        lblTitle.setText("Update Information");
 
-        btnAdd.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnAdd.setText("Add Employee");
-        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+        btnUpdate.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnUpdate.setText("Update");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddActionPerformed(evt);
+                btnUpdateActionPerformed(evt);
             }
         });
 
@@ -76,8 +75,6 @@ public class NewEmployeeForm extends javax.swing.JFrame {
 
         lblEmpID2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblEmpID2.setText("Enter First Name:");
-
-        txtEmpID.setText("1000");
 
         txtLastName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -125,15 +122,12 @@ public class NewEmployeeForm extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(120, 120, 120)
-                        .addComponent(btnAdd)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnUpdate)
+                        .addGap(85, 85, 85)
                         .addComponent(btnGoBack))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(83, 83, 83)
-                                .addComponent(lblTitle))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(52, 52, 52)
                                 .addComponent(lblEmpID)
@@ -160,13 +154,17 @@ public class NewEmployeeForm extends javax.swing.JFrame {
                                     .addComponent(CboxRole, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addGap(0, 49, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(lblTitle)
+                .addGap(90, 90, 90))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(12, 12, 12)
+                .addContainerGap()
                 .addComponent(lblTitle)
-                .addGap(12, 12, 12)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblEmpID1)
                     .addComponent(txtEmpID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -188,7 +186,7 @@ public class NewEmployeeForm extends javax.swing.JFrame {
                     .addComponent(CboxGender, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAdd)
+                    .addComponent(btnUpdate)
                     .addComponent(btnGoBack))
                 .addContainerGap())
         );
@@ -196,15 +194,21 @@ public class NewEmployeeForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+    private void PopulateFields(){
+        txtEmpID.setText(OriginalEmpInfo.getEmployeeID());
+        CboxRole.setSelectedItem(OriginalEmpInfo.getEmployeePosition());
+        txtLastName.setText(OriginalEmpInfo.getLastName());
+        txtFirstName.setText(OriginalEmpInfo.getFirstName());
+        CboxGender.setSelectedItem(OriginalEmpInfo.getEmployeeGender());
+    }
+    
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         // TODO add your handling code here:
         try{
-        String pattern = "^\\\\d";
-        
-        String EmployeeID = txtEmpID.getText();
+        String EmployeeID = txtEmpID.getText().trim();
         String EmployeePosition = CboxRole.getSelectedItem().toString();
-        String LastName = txtLastName.getText();
-        String FirstName = txtFirstName.getText();
+        String LastName = txtLastName.getText().trim();
+        String FirstName = txtFirstName.getText().trim();
         String EmployeeGender = CboxGender.getSelectedItem().toString();
         
         if (EmployeeID.trim().isEmpty()||LastName.trim().isEmpty()&&FirstName.trim().isEmpty()){
@@ -212,14 +216,22 @@ public class NewEmployeeForm extends javax.swing.JFrame {
             return;
         }
         
-        Employee employee = new Employee(EmployeeID, EmployeePosition, LastName, FirstName, EmployeeGender);
-        Employees = new ArrayList<>();
-        Employees.add(employee);
-        MotorPHCSVUtil.SaveDetails(employee);
         
-        JOptionPane.showMessageDialog(this, "Added New Employee!", "Successfull!", JOptionPane.INFORMATION_MESSAGE);
+            
+        Employee updatedEmpInfo = new Employee(OriginalEmpInfo.getEmployeeID(), EmployeePosition, LastName, FirstName, EmployeeGender);
         
-        txtEmpID.setText("1000");
+        boolean Success = MotorPHCSVUtil.UpdateEmpInfo(updatedEmpInfo);
+        if (Success){
+            JOptionPane.showMessageDialog(this,"Employee information updated successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
+            parentView.refreshTable();
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "Failed to update Employee Information", "Error", JOptionPane.WARNING_MESSAGE);
+        }
+        
+        
+        
+        txtEmpID.setText("");
         CboxRole.setSelectedItem("HR");
         txtLastName.setText("");
         txtFirstName.setText("");
@@ -229,9 +241,9 @@ public class NewEmployeeForm extends javax.swing.JFrame {
             "Please enter STRING ONLY in the text fields.", 
             "INPUT ERROR!", 
             JOptionPane.WARNING_MESSAGE);
-        }    
+        }
         
-    }//GEN-LAST:event_btnAddActionPerformed
+    }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void txtLastNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLastNameActionPerformed
         // TODO add your handling code here:
@@ -251,12 +263,10 @@ public class NewEmployeeForm extends javax.swing.JFrame {
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // TODO add your handling code here:
-        
     }//GEN-LAST:event_formWindowClosing
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         // TODO add your handling code here:
-        
     }//GEN-LAST:event_formWindowClosed
 
     private void btnGoBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGoBackActionPerformed
@@ -304,8 +314,8 @@ public class NewEmployeeForm extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> CboxGender;
     private javax.swing.JComboBox<String> CboxRole;
-    private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnGoBack;
+    private javax.swing.JButton btnUpdate;
     private javax.swing.JLabel lblEmpID;
     private javax.swing.JLabel lblEmpID1;
     private javax.swing.JLabel lblEmpID2;
@@ -316,6 +326,6 @@ public class NewEmployeeForm extends javax.swing.JFrame {
     private javax.swing.JTextField txtFirstName;
     private javax.swing.JTextField txtLastName;
     // End of variables declaration//GEN-END:variables
-private List<Employee> Employees;
+private List<Employee> updatedEmpInfo;
 
 }

@@ -1,10 +1,16 @@
-
+ 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 public class Grp3EmpInfo extends javax.swing.JFrame {
 
+    
     /**
      * Creates new form Grp3EmpInfo
      */
@@ -17,6 +23,14 @@ public class Grp3EmpInfo extends javax.swing.JFrame {
 //        this.parentForm = parent;
         initComponents();
         loadEmpInfo();
+        addTableSelectionListener();
+        
+        btnEdit.setEnabled(false);
+        btnDelete.setEnabled(false);
+        btnCalculate.setEnabled(false);
+        EnterBasicSalary.setEnabled(false);
+        EnterDaysWorked.setEnabled(false);
+        EnterOvertimeHours.setEnabled(false);
     }
 
     /**
@@ -32,6 +46,16 @@ public class Grp3EmpInfo extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblEmpInfo = new javax.swing.JTable();
+        btnEdit = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
+        btnCalculate = new javax.swing.JButton();
+        btnNewEmp = new javax.swing.JButton();
+        EnterBasicSalary = new javax.swing.JTextField();
+        EnterDaysWorked = new javax.swing.JTextField();
+        EnterOvertimeHours = new javax.swing.JTextField();
+        lblBasicSalary = new javax.swing.JLabel();
+        lblBasicSalary1 = new javax.swing.JLabel();
+        lblBasicSalary2 = new javax.swing.JLabel();
 
         jButton1.setText("jButton1");
 
@@ -65,18 +89,71 @@ public class Grp3EmpInfo extends javax.swing.JFrame {
             tblEmpInfo.getColumnModel().getColumn(3).setHeaderValue("Title 4");
         }
 
+        btnEdit.setText("Edit Row");
+
+        btnDelete.setText("Delete Row");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
+
+        btnCalculate.setText("Calculate");
+        btnCalculate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCalculateActionPerformed(evt);
+            }
+        });
+
+        btnNewEmp.setText("New Employee");
+        btnNewEmp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNewEmpActionPerformed(evt);
+            }
+        });
+
+        lblBasicSalary.setText("Basic Salary:");
+
+        lblBasicSalary1.setText("Days Worked:");
+
+        lblBasicSalary2.setText("Overtime Hours:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 725, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel1)
+                        .addGap(304, 304, 304))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblBasicSalary, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblBasicSalary1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblBasicSalary2))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(EnterBasicSalary, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(49, 49, 49)
+                                .addComponent(btnNewEmp)
+                                .addGap(168, 168, 168)
+                                .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(EnterDaysWorked, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(EnterOvertimeHours, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(281, 281, 281))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(48, 48, 48)
+                .addComponent(btnCalculate, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -85,7 +162,24 @@ public class Grp3EmpInfo extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(157, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnDelete)
+                    .addComponent(btnEdit)
+                    .addComponent(btnNewEmp)
+                    .addComponent(EnterBasicSalary, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblBasicSalary))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(EnterDaysWorked, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblBasicSalary1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(EnterOvertimeHours, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblBasicSalary2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnCalculate)
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         pack();
@@ -95,10 +189,44 @@ public class Grp3EmpInfo extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_formWindowClosing
 
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void btnCalculateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalculateActionPerformed
+        // TODO add your handling code here:
+        try{
+        int BasicSalary = Integer.parseInt(EnterBasicSalary.getText());
+        int DaysWorked = Integer.parseInt(EnterDaysWorked.getText());
+        int OvertimeHours = Integer.parseInt(EnterOvertimeHours.getText());
+
+        var Calculate = new PayrollCalculation(BasicSalary, DaysWorked, OvertimeHours);
+
+        JOptionPane.showMessageDialog(this, """
+                                            Summary\n
+                                            """ + Calculate.showEarnings() + "\n"
+                + Calculate.ShowBenefits() + "\n"
+                + Calculate.showDeductions() + "\n"
+                + Calculate.Summary() + "\n");
+        } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, 
+        "Please enter NUMBERS ONLY in the salary, days worked, and overtime fields.", 
+        "INPUT ERROR!", 
+        JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_btnCalculateActionPerformed
+
+    private void btnNewEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewEmpActionPerformed
+        // TODO add your handling code here:
+        NewEmployeeForm NEF = new NewEmployeeForm();
+        NEF.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnNewEmpActionPerformed
+
     
     private void loadEmpInfo(){
-        Employees = MotorPHCSVUtil.loadEmployee();
-        String[] ColumnHeader = {"Employee ID", "Last Name", "First Name", "Address", "Birthday", "Gender"};
+        Employees = MotorPHCSVUtil.LoadEmployee();
+        String[] ColumnHeader = {"Employee ID", "Employee Position","Last Name", "First Name", "Gender"};
         tableModel = new DefaultTableModel(ColumnHeader, 0){
             @Override
             public boolean isCellEditable(int row, int column){
@@ -109,10 +237,9 @@ public class Grp3EmpInfo extends javax.swing.JFrame {
         for(Employee employee: Employees){
         String[] row = {
                     employee.getEmployeeID(),
+                    employee.getEmployeePosition(),
                     employee.getLastName(),
                     employee.getFirstName(),
-                    employee.getAddress(),
-                    employee.getBirthday(),
                     employee.getEmployeeGender()
                     };
                     tableModel.addRow(row);
@@ -120,6 +247,74 @@ public class Grp3EmpInfo extends javax.swing.JFrame {
         
         tblEmpInfo.setModel(tableModel);
     }
+    
+    public void refreshTable(){
+        loadEmpInfo();
+    }
+    
+    private void addTableSelectionListener(){
+        tblEmpInfo.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                boolean selected = tblEmpInfo.getSelectedRow() != -1;
+                btnEdit.setEnabled(selected);
+                btnDelete.setEnabled(selected);
+                btnCalculate.setEnabled(selected);
+                EnterBasicSalary.setEnabled(selected);
+                EnterDaysWorked.setEnabled(selected);
+                EnterOvertimeHours.setEnabled(selected);
+                }
+        } );
+        
+        btnDelete.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int selectedRow = tblEmpInfo.getSelectedRow();
+                if(selectedRow != -1){
+                    String EmployeeID = tableModel.getValueAt(selectedRow, 0).toString();
+                    int confirm = JOptionPane.showConfirmDialog(
+                    Grp3EmpInfo.this,
+                    "Are you sure you want to delete this Employee Information?",
+                    "Confirm Delete",
+                    JOptionPane.YES_NO_OPTION
+                );
+                    if(confirm == JOptionPane.YES_OPTION){
+                        boolean deleted = MotorPHCSVUtil.DeleteEmpInfo(EmployeeID);
+                        if(deleted){
+                            tableModel.removeRow(selectedRow);
+                            JOptionPane.showMessageDialog(Grp3EmpInfo.this,
+                            "Employee Record deleted successfully!"
+                            );
+                        } else{
+                            JOptionPane.showMessageDialog(Grp3EmpInfo.this, 
+                            "Failed to Delete record.",
+                            "Error!",
+                            JOptionPane.ERROR_MESSAGE
+                            );
+                        }
+                    }
+                }
+            }
+        });
+              
+        btnEdit.addActionListener(new ActionListener() {
+        @Override
+            public void actionPerformed(ActionEvent e) {
+                int selectedRow = tblEmpInfo.getSelectedRow();
+                if(selectedRow != -1){
+                    String EmployeeID = tableModel.getValueAt(selectedRow, 0).toString();
+                    Employee selectedEmployee = MotorPHCSVUtil.getEmployeeByID(EmployeeID);
+                    if(selectedEmployee != null){
+                        EditEmp editForm = new EditEmp(selectedEmployee, Grp3EmpInfo.this);
+                        editForm.setLocationRelativeTo(Grp3EmpInfo.this);
+                        editForm.setVisible(true);
+                        
+                    }
+                }
+            }
+        }); 
+}
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -153,9 +348,19 @@ public class Grp3EmpInfo extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField EnterBasicSalary;
+    private javax.swing.JTextField EnterDaysWorked;
+    private javax.swing.JTextField EnterOvertimeHours;
+    private javax.swing.JButton btnCalculate;
+    private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnEdit;
+    private javax.swing.JButton btnNewEmp;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblBasicSalary;
+    private javax.swing.JLabel lblBasicSalary1;
+    private javax.swing.JLabel lblBasicSalary2;
     private javax.swing.JTable tblEmpInfo;
     // End of variables declaration//GEN-END:variables
 }
