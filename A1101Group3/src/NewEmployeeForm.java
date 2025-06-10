@@ -1,27 +1,17 @@
-import java.awt.Toolkit;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 
 public class NewEmployeeForm extends javax.swing.JFrame {
 
-   
     /**
      * Creates new form NewEmployeeForm
      */
     public NewEmployeeForm() {
-        
-        
-        
         initComponents();
         
-        
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -39,23 +29,17 @@ public class NewEmployeeForm extends javax.swing.JFrame {
         txtEmpID = new javax.swing.JTextField();
         txtLastName = new javax.swing.JTextField();
         txtFirstName = new javax.swing.JTextField();
+        lblEmpID7 = new javax.swing.JLabel();
+        lblEmpID8 = new javax.swing.JLabel();
+        txtBirthday = new javax.swing.JTextField();
         lblGender = new javax.swing.JLabel();
         CboxGender = new javax.swing.JComboBox<>();
-        CboxRole = new javax.swing.JComboBox<>();
-        lblGender1 = new javax.swing.JLabel();
-        btnGoBack = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtAddress = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(450, 500));
         setResizable(false);
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosed(java.awt.event.WindowEvent evt) {
-                formWindowClosed(evt);
-            }
-            public void windowClosing(java.awt.event.WindowEvent evt) {
-                formWindowClosing(evt);
-            }
-        });
 
         lblTitle.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         lblTitle.setText("New Employee Form");
@@ -77,8 +61,6 @@ public class NewEmployeeForm extends javax.swing.JFrame {
         lblEmpID2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblEmpID2.setText("Enter First Name:");
 
-        txtEmpID.setText("1000");
-
         txtLastName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtLastNameActionPerformed(evt);
@@ -88,6 +70,18 @@ public class NewEmployeeForm extends javax.swing.JFrame {
         txtFirstName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtFirstNameActionPerformed(evt);
+            }
+        });
+
+        lblEmpID7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblEmpID7.setText("Enter Address:");
+
+        lblEmpID8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblEmpID8.setText("Enter Birthday:");
+
+        txtBirthday.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBirthdayActionPerformed(evt);
             }
         });
 
@@ -101,22 +95,9 @@ public class NewEmployeeForm extends javax.swing.JFrame {
             }
         });
 
-        CboxRole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "HR", "IT", "Finance", "Admin" }));
-        CboxRole.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CboxRoleActionPerformed(evt);
-            }
-        });
-
-        lblGender1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lblGender1.setText("Employee Role:");
-
-        btnGoBack.setText("Go Back");
-        btnGoBack.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGoBackActionPerformed(evt);
-            }
-        });
+        txtAddress.setColumns(20);
+        txtAddress.setRows(5);
+        jScrollPane1.setViewportView(txtAddress);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -125,41 +106,42 @@ public class NewEmployeeForm extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(120, 120, 120)
-                        .addComponent(btnAdd)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnGoBack))
+                        .addGap(83, 83, 83)
+                        .addComponent(lblTitle))
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(51, 51, 51)
+                        .addComponent(lblEmpID1)
+                        .addGap(65, 65, 65)
+                        .addComponent(txtEmpID, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(52, 52, 52)
+                        .addComponent(lblEmpID)
+                        .addGap(78, 78, 78)
+                        .addComponent(txtLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(51, 51, 51)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(51, 51, 51)
+                        .addComponent(lblEmpID8)
+                        .addGap(94, 94, 94)
+                        .addComponent(txtBirthday, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(51, 51, 51)
+                        .addComponent(lblGender)
+                        .addGap(136, 136, 136)
+                        .addComponent(CboxGender, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(120, 120, 120)
+                        .addComponent(btnAdd))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(51, 51, 51)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(83, 83, 83)
-                                .addComponent(lblTitle))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(52, 52, 52)
-                                .addComponent(lblEmpID)
-                                .addGap(78, 78, 78)
-                                .addComponent(txtLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(51, 51, 51)
-                                .addComponent(lblGender)
-                                .addGap(136, 136, 136)
-                                .addComponent(CboxGender, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(51, 51, 51)
-                                .addComponent(lblEmpID2)
-                                .addGap(78, 78, 78)
-                                .addComponent(txtFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(51, 51, 51)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblEmpID1)
-                                    .addComponent(lblGender1))
-                                .addGap(65, 65, 65)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtEmpID, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
-                                    .addComponent(CboxRole, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                        .addGap(0, 49, Short.MAX_VALUE)))
-                .addContainerGap())
+                            .addComponent(lblEmpID2)
+                            .addComponent(lblEmpID7))
+                        .addGap(78, 78, 78)
+                        .addComponent(txtFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -170,10 +152,6 @@ public class NewEmployeeForm extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblEmpID1)
                     .addComponent(txtEmpID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblGender1)
-                    .addComponent(CboxRole, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblEmpID)
@@ -182,15 +160,20 @@ public class NewEmployeeForm extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblEmpID2)
                     .addComponent(txtFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(12, 12, 12)
+                .addComponent(lblEmpID7)
+                .addGap(12, 12, 12)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblEmpID8)
+                    .addComponent(txtBirthday, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblGender)
                     .addComponent(CboxGender, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAdd)
-                    .addComponent(btnGoBack))
-                .addContainerGap())
+                .addComponent(btnAdd))
         );
 
         pack();
@@ -198,38 +181,32 @@ public class NewEmployeeForm extends javax.swing.JFrame {
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
-        try{
-        String pattern = "^\\\\d";
-        
         String EmployeeID = txtEmpID.getText();
-        String EmployeePosition = CboxRole.getSelectedItem().toString();
         String LastName = txtLastName.getText();
         String FirstName = txtFirstName.getText();
+        String Address = txtAddress.getText();
+        String Birthday = txtBirthday.getText();
         String EmployeeGender = CboxGender.getSelectedItem().toString();
         
-        if (EmployeeID.trim().isEmpty()||LastName.trim().isEmpty()&&FirstName.trim().isEmpty()){
+        if (EmployeeID.trim().isEmpty()||LastName.trim().isEmpty()&&FirstName.trim().isEmpty()
+            ||Address.trim().isEmpty()&&Birthday.trim().isEmpty()){
             JOptionPane.showMessageDialog(this,"Please Enter values inside the Text Fields", "Missing Info", JOptionPane.WARNING_MESSAGE);
-            return;
         }
         
-        Employee employee = new Employee(EmployeeID, EmployeePosition, LastName, FirstName, EmployeeGender);
+        Employee employee = new Employee(EmployeeID, LastName, FirstName, Address, Birthday, EmployeeGender);
         Employees = new ArrayList<>();
         Employees.add(employee);
-        MotorPHCSVUtil.SaveDetails(employee);
+        MotorPHCSVUtil.saveDetails(employee);
         
         JOptionPane.showMessageDialog(this, "Added New Employee!", "Successfull!", JOptionPane.INFORMATION_MESSAGE);
         
-        txtEmpID.setText("1000");
-        CboxRole.setSelectedItem("HR");
+        txtEmpID.setText("");
         txtLastName.setText("");
         txtFirstName.setText("");
+        txtAddress.setText("");
+        txtBirthday.setText("");
         CboxGender.setSelectedItem("Male");
-        } catch(InputMismatchException e){
-            JOptionPane.showMessageDialog(this, 
-            "Please enter STRING ONLY in the text fields.", 
-            "INPUT ERROR!", 
-            JOptionPane.WARNING_MESSAGE);
-        }    
+
         
     }//GEN-LAST:event_btnAddActionPerformed
 
@@ -241,30 +218,13 @@ public class NewEmployeeForm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtFirstNameActionPerformed
 
+    private void txtBirthdayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBirthdayActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtBirthdayActionPerformed
+
     private void CboxGenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CboxGenderActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_CboxGenderActionPerformed
-
-    private void CboxRoleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CboxRoleActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_CboxRoleActionPerformed
-
-    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_formWindowClosing
-
-    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_formWindowClosed
-
-    private void btnGoBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGoBackActionPerformed
-        // TODO add your handling code here:
-        Grp3EmpInfo parentForm = new Grp3EmpInfo();
-        parentForm.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_btnGoBackActionPerformed
 
     /**
      * @param args the command line arguments
@@ -296,26 +256,27 @@ public class NewEmployeeForm extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-               new NewEmployeeForm().setVisible(true);
+                new NewEmployeeForm().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> CboxGender;
-    private javax.swing.JComboBox<String> CboxRole;
     private javax.swing.JButton btnAdd;
-    private javax.swing.JButton btnGoBack;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblEmpID;
     private javax.swing.JLabel lblEmpID1;
     private javax.swing.JLabel lblEmpID2;
+    private javax.swing.JLabel lblEmpID7;
+    private javax.swing.JLabel lblEmpID8;
     private javax.swing.JLabel lblGender;
-    private javax.swing.JLabel lblGender1;
     private javax.swing.JLabel lblTitle;
+    private javax.swing.JTextArea txtAddress;
+    private javax.swing.JTextField txtBirthday;
     private javax.swing.JTextField txtEmpID;
     private javax.swing.JTextField txtFirstName;
     private javax.swing.JTextField txtLastName;
     // End of variables declaration//GEN-END:variables
 private List<Employee> Employees;
-
 }

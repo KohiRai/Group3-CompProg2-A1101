@@ -9,10 +9,14 @@ public class Employee{
     private String EmployeeName;
     private String Birthday;
     private String EmployeeGender;
+    private String SSS;
+    private String TIN;
+    private String Philhealth;
+    private String Pagibig;
     private String LastName;
     private String FirstName;
+    private String PhoneNum;
     private String Address;
-    private String EmployeePosition;
     
 
     public Employee(String EmployeeID, String EmployeeName, String EmployeeBirthday, String EmployeeGender) {
@@ -22,11 +26,12 @@ public class Employee{
         this.EmployeeGender = EmployeeGender;
     }
 
-    public Employee(String EmployeeID, String EmployeePosition, String LastName, String FirstName, String EmployeeGender) {
+    public Employee(String EmployeeID, String LastName, String FirstName, String Address, String Birthday, String EmployeeGender) {
         this.EmployeeID = EmployeeID;
-        this.EmployeePosition = EmployeePosition;
         this.LastName = LastName;
         this.FirstName = FirstName;
+        this.Address = Address;
+        this.Birthday = Birthday;
         this.EmployeeGender = EmployeeGender;
     }
     
@@ -72,14 +77,6 @@ public class Employee{
     public String getAddress() {
         return Address;
     }
-
-    public String getEmployeePosition() {
-        return EmployeePosition;
-    }
-     
-    
-    
-    
     
    
     
