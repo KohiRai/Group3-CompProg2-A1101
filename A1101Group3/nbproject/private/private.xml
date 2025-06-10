@@ -3,11 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Juztin/Documents/NetBeansProjects/A1101Group3MotorPHGUI/src/MotorPHCSVUtil.java</file>
-            <file>file:/C:/Users/Juztin/Documents/NetBeansProjects/A1101Group3MotorPHGUI/src/Employee.java</file>
-            <file>file:/C:/Users/Juztin/Documents/NetBeansProjects/A1101Group3MotorPHGUI/files/EmpDet.csv</file>
-            <file>file:/C:/Users/Juztin/Documents/NetBeansProjects/A1101Group3MotorPHGUI/src/Group3MotorPHGUI.java</file>
-            <file>file:/C:/Users/Juztin/Documents/NetBeansProjects/A1101Group3MotorPHGUI/src/NewEmployeeForm.java</file>
+            <file>file:/C:/Users/Juztin/Documents/NetBeansProjects/A1101Group3/src/Grp3EmpInfo.java</file>
+            <file>file:/C:/Users/Juztin/Documents/NetBeansProjects/A1101Group3/src/MotorPHCSVUtil.java</file>
+            <file>file:/C:/Users/Juztin/Documents/NetBeansProjects/A1101Group3/src/Employee.java</file>
+            <file>file:/C:/Users/Juztin/Documents/NetBeansProjects/A1101Group3/src/EditEmp.java</file>
+            <file>file:/C:/Users/Juztin/Documents/NetBeansProjects/A1101Group3/src/ViewDetailsAndSalary.java</file>
+            <file>file:/C:/Users/Juztin/Documents/NetBeansProjects/A1101Group3/src/NewEmployeeForm.java</file>
         </group>
     </open-files>
 </project-private>
