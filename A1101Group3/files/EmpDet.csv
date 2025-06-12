@@ -1,4 +1,3 @@
-Employee ID,Last Name,First Name,Address,Birthday,Gender
-"10001","Bonifacio","Andres","this is an address","May 11, 2007","Male"
-"10002","Raiz","D","This is an example of an address","May 11, 2007","Female"
-"","","","","","Male"
+"Employee ID","Employee Position","Last Name","First Name","Gender"
+"10001","HR","Estacio","Juztin Kristoffer","Male"
+"10002","Employee","Ra","Na","Female"
