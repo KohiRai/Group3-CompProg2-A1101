@@ -1,4 +1,5 @@
  
+import CSVUtil.MotorPHEmployeeCSVUtil;
 import Class.Employee;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -113,6 +114,7 @@ public class EmployeeInformation extends javax.swing.JFrame {
         btnNew = new javax.swing.JButton();
         btnView = new javax.swing.JButton();
         btnEdit = new javax.swing.JButton();
+        btnLogout = new javax.swing.JButton();
 
         jButton1.setText("jButton1");
 
@@ -168,6 +170,13 @@ public class EmployeeInformation extends javax.swing.JFrame {
             }
         });
 
+        btnLogout.setText("Logout");
+        btnLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogoutActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -183,7 +192,10 @@ public class EmployeeInformation extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnView)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnEdit)))
+                        .addComponent(btnEdit))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnLogout)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -197,6 +209,8 @@ public class EmployeeInformation extends javax.swing.JFrame {
                     .addComponent(btnEdit))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnLogout)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -226,6 +240,13 @@ public class EmployeeInformation extends javax.swing.JFrame {
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnEditActionPerformed
+
+    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
+        // TODO add your handling code here:
+        Login login = new Login();
+        login.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnLogoutActionPerformed
 
     
     
@@ -264,6 +285,7 @@ public class EmployeeInformation extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEdit;
+    private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnNew;
     private javax.swing.JButton btnView;
     private javax.swing.JButton jButton1;
