@@ -2,12 +2,9 @@
 import CSVUtil.MotorPHEmployeeCSVUtil;
 import Class.Employee;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 public class EmployeeInformation extends javax.swing.JFrame {
@@ -23,14 +20,14 @@ public class EmployeeInformation extends javax.swing.JFrame {
     
     public EmployeeInformation() {
         initComponents();
-        loadEmpInfo();
+        loadEmpInfo();//Loads information to table
         addTableSelectionListener();
         
         btnView.setEnabled(false);
         btnEdit.setEnabled(false);
     }
     
-
+    //Method that Displays the information to table
     private void loadEmpInfo(){
         Employees = MotorPHEmployeeCSVUtil.LoadSelectedEmployeeInfo();
         String[] ColumnHeader = {"Employee ID", "Employee Position","Last Name", "First Name", "Gender"};
@@ -57,48 +54,41 @@ public class EmployeeInformation extends javax.swing.JFrame {
         tblEmpInfo.setModel(tableModel);
     }
     
+    //Refreshes the table once an update is made
     public void refreshTable(){
         loadEmpInfo();
     }
     
+    //Adds table selection listener
     private void addTableSelectionListener(){
-        tblEmpInfo.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-            @Override
-            public void valueChanged(ListSelectionEvent e) {
-                boolean selected = tblEmpInfo.getSelectedRow() != -1;
-                btnView.setEnabled(selected);
-                btnEdit.setEnabled(selected);
-                }
-        } );
+        tblEmpInfo.getSelectionModel().addListSelectionListener((ListSelectionEvent e) -> {
+            boolean selected = tblEmpInfo.getSelectedRow() != -1;
+            btnView.setEnabled(selected);
+            btnEdit.setEnabled(selected);
+        });
         
-        btnView.addActionListener(new ActionListener() {
-        @Override
-            public void actionPerformed(ActionEvent e) {
-                int selectedRow = tblEmpInfo.getSelectedRow();
-                if(selectedRow != -1){
-                    String EmployeeID = tableModel.getValueAt(selectedRow, 0).toString();
-                    Employee selectedEmployee = MotorPHEmployeeCSVUtil.getEmployeeByID(EmployeeID);
-                    
-                    if(selectedEmployee != null){
-                        ViewEmployee view = new ViewEmployee(selectedEmployee, EmployeeInformation.this);
-                        view.setLocationRelativeTo(EmployeeInformation.this);
-                        view.setVisible(true);
-                        dispose();
-                    }
+        //Action made if View button is pressed
+        btnView.addActionListener((ActionEvent e) -> {
+            int selectedRow = tblEmpInfo.getSelectedRow();
+            if(selectedRow != -1){
+                String EmployeeID = tableModel.getValueAt(selectedRow, 0).toString();
+                Employee selectedEmployee = MotorPHEmployeeCSVUtil.getEmployeeByID(EmployeeID);
+                
+                if(selectedEmployee != null){
+                    ViewEmployee view = new ViewEmployee(selectedEmployee, EmployeeInformation.this);
+                    view.setLocationRelativeTo(EmployeeInformation.this);
+                    view.setVisible(true);
+                    dispose();
                 }
             }
         }); 
         
-        btnEdit.addActionListener(new ActionListener() {
-        @Override
-            public void actionPerformed(ActionEvent e) {
-
-                        EditEmployee edit = new EditEmployee(EmployeeInformation.this);
-                        edit.setLocationRelativeTo(EmployeeInformation.this);
-                        edit.setVisible(true);
-                        dispose();
-
-            }
+        //Action to be done if Edit button is pressed
+        btnEdit.addActionListener((ActionEvent e) -> {
+            EditEmployee edit = new EditEmployee(EmployeeInformation.this);
+            edit.setLocationRelativeTo(EmployeeInformation.this);
+            edit.setVisible(true);
+            dispose();
         });
     }      
                 
@@ -221,9 +211,6 @@ public class EmployeeInformation extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_formWindowClosing
 
-    private void FrameDispose(){
-        this.dispose();
-    }
     private void btnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewActionPerformed
         // TODO add your handling code here:
         NewEmployeeForm NEF = new NewEmployeeForm();
@@ -233,8 +220,6 @@ public class EmployeeInformation extends javax.swing.JFrame {
 
     private void btnViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewActionPerformed
         // TODO add your handling code here:
-        
-        
     }//GEN-LAST:event_btnViewActionPerformed
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
@@ -243,9 +228,27 @@ public class EmployeeInformation extends javax.swing.JFrame {
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
         // TODO add your handling code here:
-        Login login = new Login();
-        login.setVisible(true);
-        this.dispose();
+        
+        int confirm = JOptionPane.showConfirmDialog(EmployeeInformation.this,
+                        "Are you sure you want to Logout?",
+                        "Confirm Logout",
+                        JOptionPane.YES_NO_OPTION
+                );
+                if(confirm == JOptionPane.YES_OPTION){
+                    JOptionPane.showMessageDialog(this,"Successfully logged out!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                    Login login = new Login();
+                    login.setVisible(true);
+                    this.dispose();
+                    } else{
+                        JOptionPane.showMessageDialog(EmployeeInformation.this,
+                                "Log out canceled",
+                                "Canceled",
+                                JOptionPane.INFORMATION_MESSAGE
+                        );
+                    }
+                
+    
+    
     }//GEN-LAST:event_btnLogoutActionPerformed
 
     

@@ -1,23 +1,16 @@
 import CSVUtil.MotorPHEmployeeCSVUtil;
 import Class.Employee;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 import javax.swing.JOptionPane;
 
-
 public class NewEmployeeForm extends javax.swing.JFrame {
     
     public NewEmployeeForm() {
-        
-    
         initComponents();
-
     }
 
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -246,11 +239,12 @@ public class NewEmployeeForm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtFirstNameActionPerformed
 
+    //Action made if Create button is pressed
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
         // TODO add your handling code here:
         
         try{
-        
+        //gets values from text fields and combo boxes
         String EmployeeID = txtEmpID.getText();
         String EmployeePosition = CboxPosition.getSelectedItem().toString();
         String LastName = txtLastName.getText();
@@ -259,18 +253,24 @@ public class NewEmployeeForm extends javax.swing.JFrame {
         String Birthday = txtBirthday.getText();
         String PhoneNumber = txtPhoneNumber.getText();
         
+        
+        //sends an error message if fields are empty
         if (EmployeeID.trim().isEmpty()||LastName.trim().isEmpty()&&FirstName.trim().isEmpty()||Birthday.trim().isEmpty()&&PhoneNumber.trim().isEmpty()){
             JOptionPane.showMessageDialog(this,"Please Enter values inside the Text Fields", "Missing Info", JOptionPane.WARNING_MESSAGE);
             return;
         }
         
+        //Constructor for employee, then is added to an array list for saving details
         Employee employee = new Employee(EmployeeID, EmployeePosition, LastName, FirstName, EmployeeGender, Birthday, PhoneNumber);
         Employees = new ArrayList<>();
         Employees.add(employee);
         MotorPHEmployeeCSVUtil.SaveDetails(employee);
         
+        
+        //success message
         JOptionPane.showMessageDialog(this, "Added New Employee!", "Successfull!", JOptionPane.INFORMATION_MESSAGE);
         
+        //Makes the text fields into default
         txtEmpID.setText("");
         CboxPosition.setSelectedItem("HR");
         txtLastName.setText("");
@@ -286,10 +286,10 @@ public class NewEmployeeForm extends javax.swing.JFrame {
         }  
     }//GEN-LAST:event_btnCreateActionPerformed
 
+    //Goes back to previous frame upon clicking
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         EmployeeInformation info = new EmployeeInformation();
         info.setVisible(true);
-
         this.dispose();
     }//GEN-LAST:event_btnCancelActionPerformed
 

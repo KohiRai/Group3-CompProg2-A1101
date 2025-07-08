@@ -82,31 +82,38 @@ public class Login extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //Action made if Signin button is pressed
     private void btnSignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignInActionPerformed
         // TODO add your handling code here:
         String Username = txtUsername.getText();
         String Pass = txtPass.getText();
         
+        //Sends an error if Fields are empty
         if (Username.trim().isEmpty() || Pass.trim().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Text Fields are not complete!", "Error", JOptionPane.WARNING_MESSAGE);
             return;
         }
         
+        //Creates a hashmap for validation
         HashMap<String,String> users = new HashMap<>();
         boolean result = MotorPHAccountsCSVUtil.verifyAuthentication(Username,Pass, users);
         
+        //Sends an error message if Login credentials inserted doesn't have the same info saved inside the CSV
         if(result == false){
             JOptionPane.showMessageDialog(this,"Incorrect Username or Password","Error",JOptionPane.WARNING_MESSAGE);
             return;
         }
         
+        //Sends a success message
         JOptionPane.showMessageDialog(this,"Successful Login!", "SUCCESS", JOptionPane.INFORMATION_MESSAGE);
         
+        //Opens the next frame after logging in
         EmployeeInformation EmpInfo = new EmployeeInformation();
         EmpInfo.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnSignInActionPerformed
 
+    //Action made if Create Account button is pressed
     private void btnCreateAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateAccountActionPerformed
         // TODO add your handling code here:
         Register register = new Register();
@@ -139,10 +146,8 @@ public class Login extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Login().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new Login().setVisible(true);
         });
     }
 

@@ -1,7 +1,5 @@
 import Class.PayrollCalculation;
 import Class.Employee;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.time.LocalDate;
 import javax.swing.JOptionPane;
 
@@ -9,8 +7,8 @@ import javax.swing.JOptionPane;
 
 public class ViewEmployee extends javax.swing.JFrame {
 
-    private Employee OriginalEmpInfo;
-    private EmployeeInformation parentView;
+    private final Employee OriginalEmpInfo;
+    private final EmployeeInformation parentView;
     LocalDate currentDate = LocalDate.now();
     int currentYear = currentDate.getYear();
     String CurrentYear = String.valueOf(currentYear);
@@ -20,10 +18,12 @@ public class ViewEmployee extends javax.swing.JFrame {
         this.parentView = parent;
         initComponents();
         
+        //disables fields that shouldn't be inserted by user and sets text field for current year for calculation
         txtEmpDet.setEnabled(false);
         txtPayslip.setEnabled(false);
         txtYears.setText(CurrentYear);
         txtYears.setEnabled(false);
+        
         
         txtEmpDet.setText(selectedEmployee.toString());
     }
@@ -189,18 +189,22 @@ public class ViewEmployee extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //Actions made once compute action is pressed
     private void ComputeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComputeActionPerformed
         // TODO add your handling code here:
         try{
+        //gets text fields information and month
         int BasicSalary = Integer.parseInt(txtBasicSalary.getText());
         int DaysWorked = Integer.parseInt(txtDaysWorked.getText());
         int OvertimeHours = Integer.parseInt(txtOvertimeHours.getText());
         String Months = cmbMonths.getSelectedItem().toString();
         
+        //Sends information to constructor to access the methods for calculation
         var Calculate = new PayrollCalculation(BasicSalary, DaysWorked, OvertimeHours);
-
+        
+        //Sets the Information for calculated fields
         txtPayslip.setText("Payslip\n"
-                            + "Pay Period: " + Months + "" + CurrentYear + "\n"
+                            + "Pay Period: " + Months + " " + CurrentYear + "\n"
                             + Calculate.showEarnings() + "\n"
                             + Calculate.ShowBenefits() + "\n"
                             + Calculate.showDeductions() + "\n"

@@ -14,7 +14,7 @@ public class EditEmployee extends javax.swing.JFrame {
 
     private DefaultTableModel tableModel;
     private List<Employee> Employees;
-    private EmployeeInformation parentView;
+    private final EmployeeInformation parentView;
     
     public EditEmployee(EmployeeInformation This) {
         this.parentView = This;
@@ -69,20 +69,18 @@ public class EditEmployee extends javax.swing.JFrame {
     }
     
     private void addTableSelectionListener(){
-        tblEmpInfo.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-            @Override
-            public void valueChanged(ListSelectionEvent e) {
-                boolean selected = tblEmpInfo.getSelectedRow() != -1;
-                btnDelete.setEnabled(selected);
-                btnUpdate.setEnabled(selected);
-                txtEmpID.setEnabled(selected);
-                txtLastName.setEnabled(selected);
-                txtFirstName.setEnabled(selected);
-                cboxPosition.setEnabled(selected);
-                cboxGender.setEnabled(selected);
-                txtBirthday.setEnabled(selected);
-                txtPhoneNumber.setEnabled(selected);
-                
+        tblEmpInfo.getSelectionModel().addListSelectionListener((ListSelectionEvent e) -> {
+            boolean selected = tblEmpInfo.getSelectedRow() != -1;
+            btnDelete.setEnabled(selected);
+            btnUpdate.setEnabled(selected);
+            txtEmpID.setEnabled(selected);
+            txtLastName.setEnabled(selected);
+            txtFirstName.setEnabled(selected);
+            cboxPosition.setEnabled(selected);
+            cboxGender.setEnabled(selected);
+            txtBirthday.setEnabled(selected);
+            txtPhoneNumber.setEnabled(selected);
+            
             int selectedRow = tblEmpInfo.getSelectedRow();
 
             if (selectedRow != -1) {
@@ -96,42 +94,36 @@ public class EditEmployee extends javax.swing.JFrame {
                 cboxGender.setSelectedItem(selectedEmployee.getGender());
                 txtBirthday.setText(selectedEmployee.getBirthday());
                 txtPhoneNumber.setText(selectedEmployee.getPhoneNumber());
-                }
             }
-
         });
         
 
         
-        btnDelete.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int selectedRow = tblEmpInfo.getSelectedRow();
-                if(selectedRow != -1){
-                    String EmployeeID = tableModel.getValueAt(selectedRow, 0).toString();
-                    int confirm = JOptionPane.showConfirmDialog(EditEmployee.this,
-                    "Are you sure you want to delete this Employee Information?",
-                    "Confirm Delete",
-                    JOptionPane.YES_NO_OPTION
+        btnDelete.addActionListener((ActionEvent e) -> {
+            int selectedRow = tblEmpInfo.getSelectedRow();
+            if(selectedRow != -1){
+                String EmployeeID = tableModel.getValueAt(selectedRow, 0).toString();
+                int confirm = JOptionPane.showConfirmDialog(EditEmployee.this,
+                        "Are you sure you want to delete this Employee Information?",
+                        "Confirm Delete",
+                        JOptionPane.YES_NO_OPTION
                 );
-                    if(confirm == JOptionPane.YES_OPTION){
-                        boolean deleted = MotorPHEmployeeCSVUtil.DeleteEmpInfo(EmployeeID);
-                        if(deleted){
-                            tableModel.removeRow(selectedRow);
-                            JOptionPane.showMessageDialog(EditEmployee.this,
-                            "Employee Record deleted successfully!"
-                            );
-                        } else{
-                            JOptionPane.showMessageDialog(EditEmployee.this, 
-                            "Failed to Delete record.",
-                            "Error!",
-                            JOptionPane.ERROR_MESSAGE
-                            );
-                        }
+                if(confirm == JOptionPane.YES_OPTION){
+                    boolean deleted = MotorPHEmployeeCSVUtil.DeleteEmpInfo(EmployeeID);
+                    if(deleted){
+                        tableModel.removeRow(selectedRow);
+                        JOptionPane.showMessageDialog(EditEmployee.this,
+                                "Employee Record deleted successfully!"
+                        );
+                    } else{
+                        JOptionPane.showMessageDialog(EditEmployee.this,
+                                "Failed to Delete record.",
+                                "Error!",
+                                JOptionPane.ERROR_MESSAGE
+                        );
                     }
                 }
             }
-            
         });
     }
  
@@ -352,7 +344,14 @@ public class EditEmployee extends javax.swing.JFrame {
         Employee updatedEmpInfo = new Employee(EmployeeID, EmployeePosition, LastName, FirstName, EmployeeGender, Birthday, PhoneNumber);
         
         boolean Success = MotorPHEmployeeCSVUtil.UpdateEmpInfo(updatedEmpInfo);
-        if (Success){
+        
+        int confirm = JOptionPane.showConfirmDialog(EditEmployee.this,
+                        "Are you sure you want to Update?",
+                        "Confirm Logout",
+                        JOptionPane.YES_NO_OPTION
+                );
+  
+        if (Success && confirm == JOptionPane.YES_OPTION){
             JOptionPane.showMessageDialog(this,"Employee information updated successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
             parentView.refreshTable();
             this.refreshTable();
@@ -401,10 +400,8 @@ public class EditEmployee extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new EditEmployee(null).setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new EditEmployee(null).setVisible(true);
         });
     }
 

@@ -3,25 +3,19 @@ package CSVUtil;
 import Class.Employee;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
-import com.opencsv.exceptions.CsvException;
-
-
 import java.io.FileReader;
 import java.io.FileWriter;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.io.BufferedReader;
 import java.io.File;
-
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 public class MotorPHEmployeeCSVUtil {
     
-    private static String FILE_PATH = "files/EmpDet.csv";
-    private static String[] HEADERS = {"Employee ID","Employee Position","Last Name","First Name","Gender", "Birthday", "Phone Number"};
+    private static final String FILE_PATH = "files/EmpDet.csv";
+    private static final String[] HEADERS = {"Employee ID","Employee Position","Last Name","First Name","Gender", "Birthday", "Phone Number"};
     
     //Saves Details of the employees
     public static void SaveDetails(Employee employee){
@@ -52,6 +46,7 @@ public class MotorPHEmployeeCSVUtil {
                     writer.writeNext(HEADERS,false);
                 }
                 
+                //Structure of the employee details to be saved to CSVFile
                 String[] row = {
                     employee.getEmployeeID(),
                     employee.getPosition(),
@@ -71,6 +66,8 @@ public class MotorPHEmployeeCSVUtil {
         }
         
     }
+    
+    //Loads Selected Employeeinfo to be shown to all employees
     public static List<Employee> LoadSelectedEmployeeInfo(){
             List<Employee> EmployeeList = new ArrayList<>();
             
@@ -164,7 +161,10 @@ public class MotorPHEmployeeCSVUtil {
             return EmployeeList;
     }
     
+    //Ensures that the file has headers
     public static void EnsureFileWithHeaders(){
+        
+        //Ensure folder exists
         File folder = new File("files");
         if(!folder.exists()){
             folder.mkdir();
@@ -173,6 +173,7 @@ public class MotorPHEmployeeCSVUtil {
         File file = new File(FILE_PATH);
         boolean needsHeader = false;
         
+        //create file with headers if doesn't exist
         if(!file.exists()){
             try(CSVWriter writer = new CSVWriter(new FileWriter(file))){
                 writer.writeNext(HEADERS);
@@ -182,6 +183,7 @@ public class MotorPHEmployeeCSVUtil {
             return;
         }
         
+        //Reads or validates the header
         try(BufferedReader br = new BufferedReader(new FileReader(file))){
             String firstLine = br.readLine();
             if(firstLine==null || !firstLine.toLowerCase().contains("employee id")){
@@ -191,6 +193,7 @@ public class MotorPHEmployeeCSVUtil {
             System.err.println("Error reading CSV for header check: " + e.getMessage());
         }
         
+        //Creates a header if none
         if(needsHeader){
             try(CSVReader reader = new CSVReader( new FileReader(file))){
                 List<String[]> allRows = new ArrayList<>();
@@ -217,8 +220,10 @@ public class MotorPHEmployeeCSVUtil {
         
     }
     
+    //Method for Deleting Employee Information
      public static boolean DeleteEmpInfo(String EmployeeID){
         EnsureFileWithHeaders();
+        
         File file = new File(FILE_PATH);
         List<String[]> allRows = new ArrayList<>();
         try(CSVReader reader = new CSVReader(new FileReader(file))){
@@ -227,6 +232,7 @@ public class MotorPHEmployeeCSVUtil {
             System.err.println("Error reading CSV for update: " + e.getMessage());
             return false;
         }
+        
         
         List<String[]>UpdatedRows = new ArrayList<>();
         UpdatedRows.add(HEADERS);
@@ -251,6 +257,8 @@ public class MotorPHEmployeeCSVUtil {
         return true;
     }
     
+     
+     //Method for Updating Employee Info
     public static boolean UpdateEmpInfo(Employee UpdatedEmployee){
         EnsureFileWithHeaders();
         File file = new File(FILE_PATH);
@@ -296,6 +304,8 @@ public class MotorPHEmployeeCSVUtil {
         return true;
     }
 
+    
+    //Method that gets Employee Information by ID
     public static Employee getEmployeeByID(String EmployeeID) {
         List<Employee> employees = LoadEmployeeInfo();
         for(Employee employee : employees){

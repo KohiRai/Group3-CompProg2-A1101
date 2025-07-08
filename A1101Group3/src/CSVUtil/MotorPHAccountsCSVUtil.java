@@ -3,19 +3,19 @@ package CSVUtil;
 import Class.Authentication;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
+import com.opencsv.exceptions.CsvException;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
 
 public class MotorPHAccountsCSVUtil {
-    private static String FILE_PATH = "files/AuthenticationDetails.csv";
-    private static String[] HEADERS = {"Username", "Password"};
+    private static final String FILE_PATH = "files/AuthenticationDetails.csv";
+    private static final String[] HEADERS = {"Username", "Password"};
 
 
     
@@ -47,7 +47,7 @@ public class MotorPHAccountsCSVUtil {
                 if (!fileExists || needsHeader) {
                     writer.writeNext(HEADERS, false);
                 }
-                
+                //Structure of login credentials for Writing to CSVfile
                 String[] row = {
                     authentication.getUsername(),
                     authentication.getPassword()
@@ -62,6 +62,7 @@ public class MotorPHAccountsCSVUtil {
 
     }
     
+    //Method that verifies login if true or false
      public static boolean verifyAuthentication(String Username, String Password, HashMap<String,String> user){
             try{
             //Ensure folder exists
@@ -93,7 +94,7 @@ public class MotorPHAccountsCSVUtil {
             }
         }    
             return user.containsKey(Username) && user.get(Username).equals(Password);   
-        }catch(Exception e){
+        }catch(CsvException | IOException e){
             System.err.println("Error reading from CSV: " + e.getMessage());
         }
         return false;

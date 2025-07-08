@@ -1,11 +1,5 @@
 package Class;
 
-
-import java.util.ArrayList;
-import java.util.List;
-
-
-
 public class Employee{
     private String EmployeeID;
     private String EmployeeName;
@@ -16,7 +10,7 @@ public class Employee{
     private String Position;
     private String PhoneNumber;
     
-
+    //Constructors
     public Employee(String EmployeeID, String EmployeePosition, String LastName, String FirstName, String EmployeeGender) {
         this.EmployeeID = EmployeeID;
         this.Position = EmployeePosition;
@@ -35,16 +29,7 @@ public class Employee{
         this.PhoneNumber = PhoneNumber;
     }
     
-    
-    
-    
-
-    
-//    @Override
-//    public int compareTo(Employee other) {
-//        return EmployeeID.compareTo(other.EmployeeID);
-//    }
-//
+    //Makes the CSV employee information to string
     @Override
     public String toString(){ 
         return """             
@@ -53,6 +38,7 @@ public class Employee{
                 + PhoneNumber;
     }
     
+    //getter methods
     public String getEmployeeID() {
     return EmployeeID;
     }
@@ -80,13 +66,4 @@ public class Employee{
     public String getPhoneNumber(){
         return PhoneNumber;
     }
-    
-    
-    
-    
-    
-    
-    
-   
-    
 }

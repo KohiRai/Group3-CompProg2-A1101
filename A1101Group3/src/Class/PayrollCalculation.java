@@ -16,7 +16,8 @@ public class PayrollCalculation<T> {
         this.DaysWorked = DaysWorked;
         this.OvertimeHours = OvertimeHours;
     }
-
+    
+    //Calculates for Earnings and returns/prints Overall Earnings part
     public String showEarnings(){
         DailyRate = BasicSalary / 20;
         OverTimePay = DailyRate * .10; 
@@ -29,6 +30,7 @@ public class PayrollCalculation<T> {
                + "Gross Income: " + decfor.format(GrossIncome) + "\n";
     }
     
+    //Calculates for Benefits and returns/prints Overall Benefits part
     public String ShowBenefits(){
         Benefits = 4500.00d;
         return """
@@ -38,6 +40,7 @@ public class PayrollCalculation<T> {
                Benefits: P""" + decfor.format(Benefits) + "\n";
     }
     
+    //Calculates for Deductions and returns/prints Overall Deductions part
     public String showDeductions(){
         SSS = BasicSalary * 0.045; //Calculation for SSS Deduction
         Philhealth = BasicSalary * 0.03; //Calculation for SSS Deduction
@@ -51,6 +54,7 @@ public class PayrollCalculation<T> {
                + WithholdingTax();
     }
     
+    //returns/prints Overall Summary part
     public String Summary(){
         NetIncome = GrossIncome + Benefits - FinalTotalDeductions;
         return """
@@ -60,7 +64,7 @@ public class PayrollCalculation<T> {
                "Net Income: P" + decfor.format(NetIncome);
     }
     
-    //Withholding tax calculation based on the BasicSalary
+    //Withholding tax calculation based on the BasicSalary - this is based on the table in MotorPH
     private String WithholdingTax(){
         TotalDeduction = SSS + Philhealth + PagIbig;//These are Deductions without Withholding Tax Since it would be calculated with total deductions of SSS, Philhealht, and PagIbig
         WithholdingTax = 0;//WithHolding Tax is automatically 0, and would be declared inside if,elseif,else statements and would be calculated inside the conditions(If,elseif,else)
@@ -87,7 +91,5 @@ public class PayrollCalculation<T> {
                     FinalTotalDeductions = TotalDeduction + WithholdingTax;   
                     return "Withholding Tax: P" + decfor.format(WithholdingTax) + "\n" + 
                                        "Total Deductions: P" + decfor.format(FinalTotalDeductions) + "\n";
-    }
-    
-    
+    } 
 }
