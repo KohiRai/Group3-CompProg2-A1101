@@ -2,7 +2,9 @@
 import CSVUtil.MotorPHEmployeeCSVUtil;
 import Class.Employee;
 import java.awt.event.ActionEvent;
+import java.util.Hashtable;
 import java.util.List;
+import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.table.DefaultTableModel;
@@ -20,17 +22,46 @@ public class EmployeeInformation extends javax.swing.JFrame {
     
     public EmployeeInformation() {
         initComponents();
-        loadEmpInfo();//Loads information to table
+        loadSelectedEmpInfo();//Loads selected information to table
         addTableSelectionListener();
         
         btnView.setEnabled(false);
         btnEdit.setEnabled(false);
     }
     
-    //Method that Displays the information to table
+    private void loadSelectedEmpInfo() {
+    Hashtable<String, String[]> employeeMap = MotorPHEmployeeCSVUtil.loadSelectedEmployeeInfo();
+
+    String[] columnHeader = { "Employee ID", "Employee Position", "Last Name", "First Name", "Gender" };
+    tableModel = new DefaultTableModel(columnHeader, 0) {
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return false;
+        }
+    };
+
+    for (Map.Entry<String, String[]> entry : employeeMap.entrySet()) {
+        String employeeID = entry.getKey();
+        String[] employee = entry.getValue(); // [Position, LastName, FirstName, Gender]
+
+        String[] row = {
+            employeeID,
+            employee[0], // Position
+            employee[1], // Last Name
+            employee[2], // First Name
+            employee[3]  // Gender
+        };
+
+        tableModel.addRow(row);
+    }
+
+    tblEmpInfo.setModel(tableModel);
+}
+    
+    //Method that Displays all the information to table
     private void loadEmpInfo(){
-        Employees = MotorPHEmployeeCSVUtil.LoadSelectedEmployeeInfo();
-        String[] ColumnHeader = {"Employee ID", "Employee Position","Last Name", "First Name", "Gender"};
+        Employees = MotorPHEmployeeCSVUtil.LoadEmployeeInfo();
+        String[] ColumnHeader = {"Employee ID", "Employee Position","Last Name", "First Name", "Gender", "Birthday", "Phone Number"};
         tableModel = new DefaultTableModel(ColumnHeader, 0){
             @Override
             public boolean isCellEditable(int row, int column){

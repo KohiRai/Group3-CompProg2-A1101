@@ -10,6 +10,7 @@ import java.util.List;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.util.Hashtable;
 
 
 public class MotorPHEmployeeCSVUtil {
@@ -68,51 +69,23 @@ public class MotorPHEmployeeCSVUtil {
     }
     
     //Loads Selected Employeeinfo to be shown to all employees
-    public static List<Employee> LoadSelectedEmployeeInfo(){
-            List<Employee> EmployeeList = new ArrayList<>();
-            
-            try{
-            //Ensure folder exists
-            File folder = new File("files");
-            if(!folder.exists()){
-                folder.mkdir();
-            }
-            
-            File file = new File(FILE_PATH);
-            
-            //create file with headers if doesn't exist
-            if(!file.exists()){
-                try(CSVWriter writer = new CSVWriter(new FileWriter(file,true))) {
-                    writer.writeNext(HEADERS, false);
-                }
-                return EmployeeList;
-            } 
-            //Read CSV
-            try(CSVReader reader = new CSVReader(new FileReader(file))){
-                List<String[]> rows = reader.readAll();
-                
-                //Skip header row then parse remaining rows
-                for(int i = 1; 1 < rows.size(); i++){
-                    String[] row = rows.get(i);
-                    if(row.length >= 5){
-                    String EmployeeID = row[0];
-                    String EmployeePosition = row[1];
-                    String LastName = row[2];
-                    String FirstName = row[3];
-                    String EmployeeGender = row[4];
-                                                          
-                    Employee employee  = new Employee(EmployeeID, EmployeePosition, LastName, FirstName, EmployeeGender);
-                    EmployeeList.add(employee);
-                    }
-                }
-            }
-            
-        }catch(Exception e){
-            System.err.println("Error reading from CSV: " + e.getMessage());
-        }
-            
-            return EmployeeList;
+    public static Hashtable<String, String[]> loadSelectedEmployeeInfo() {
+    List<Employee> employees = LoadEmployeeInfo();
+    Hashtable<String, String[]> employeeMap = new Hashtable<>();
+
+    for (Employee emp : employees) {
+        String employeeID = emp.getEmployeeID(); // assuming you have getter methods
+        String[] partialData = new String[] {
+            emp.getPosition(),
+            emp.getLastName(),
+            emp.getFirstName(),
+            emp.getGender()
+        };
+        employeeMap.put(employeeID, partialData);
     }
+
+    return employeeMap;
+}
     
     public static List<Employee> LoadEmployeeInfo(){
             List<Employee> EmployeeList = new ArrayList<>();
@@ -138,7 +111,7 @@ public class MotorPHEmployeeCSVUtil {
                 List<String[]> rows = reader.readAll();
                 
                 //Skip header row then parse remaining rows
-                for(int i = 1; 1 < rows.size(); i++){
+                for(int i = 1; i < rows.size(); i++){
                     String[] row = rows.get(i);
                     if(row.length >= 7){
                     String EmployeeID = row[0];
